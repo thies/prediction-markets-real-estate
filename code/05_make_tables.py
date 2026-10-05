@@ -226,10 +226,10 @@ if "volume" in sv.columns:
     tot = cat.vol.sum()
     big = cat[cat.vol / tot >= 0.005]
     rest = cat[cat.vol / tot < 0.005]
-    lines = [f"{tex(c)} & {r.series:,} & {r.vol/1e6:,.0f} & {r.vol/tot*100:.1f} \\\\" for c, r in big.iterrows()]
+    lines = [f"{tex(c)} & {int(r.series):,} & {r.vol/1e6:,.0f} & {r.vol/tot*100:.1f} \\\\" for c, r in big.iterrows()]
     lines.append(f"Other categories & {rest.series.sum():,} & {rest.vol.sum()/1e6:,.0f} & {rest.vol.sum()/tot*100:.1f} \\\\")
     lines.append("\\midrule")
     for lab, ss in [("Real estate (within Economics)", re_series), ("House prices (within Economics)", price_series)]:
         v = sv[sv.ticker.isin(ss)].volume.sum()
-        lines.append(f"{lab} & {len(ss)} & {v/1e6:,.2f} & {v/tot*100:.3f} \\\\")
+        lines.append(f"{lab} & {len(ss)} & {v/1e6:,.2f} & {v/tot*100:.4f} \\\\")
     (T / "categories.tex").write_text("\n".join(lines) + "\n")
