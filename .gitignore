@@ -1,0 +1,21 @@
+# Publish code and paper only. Data are downloaded by the scripts; papers in related-literature/ are copyrighted.
+/*
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/run_all.py
+!/code/
+!/figures/
+!/latex/
+
+__pycache__/
+.claude/
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.bbl
+latex/*.blg
+
+.Rhistory
+# helper for the author's literature folder; depends on files that are not published
+code/fetch_papers.py
