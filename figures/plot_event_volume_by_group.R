@@ -18,13 +18,23 @@ p1 <- ggplot(ev, aes(x = group, y = volume + 1, fill = is_re)) +
   theme(legend.position = "none", axis.text.x = element_text(angle = 25, hjust = 1))
 save_fig("figures/event_volume_by_group.png", p1, width = 8, height = 5)
 
-ev$strike_bin <- cut(ev$strikes, breaks = c(0, 1, 3, 6, 10, 15, 60),
-                     labels = c("1", "2-3", "4-6", "7-10", "11-15", "16+"))
-agg <- aggregate(volume_per_strike ~ strike_bin + is_re, data = ev, FUN = median)
-p2 <- ggplot(agg, aes(x = strike_bin, y = volume_per_strike + 1, colour = is_re, group = is_re)) +
-  geom_line(linewidth = 0.9) + geom_point(size = 2.5) +
+# One point per event: contracts traded per strike against the number of strikes listed,
+# with a fitted line per group. Real estate events are drawn on top of the others.
+set.seed(1)
+ev$x <- ev$strikes * exp(runif(nrow(ev), -0.06, 0.06))   # small horizontal jitter; strikes are integers
+other <- ev[ev$is_re == "Other economics", ]
+re <- ev[ev$is_re == "Real estate", ]
+p2 <- ggplot(mapping = aes(x = x, y = volume_per_strike + 1)) +
+  geom_point(data = other, aes(colour = "Other economics"), alpha = 0.12, size = 0.9) +
+  geom_point(data = re, aes(colour = "Real estate"), alpha = 0.75, size = 1.6) +
+  geom_smooth(data = other, aes(x = strikes, colour = "Other economics"), method = "lm", formula = y ~ x,
+              se = FALSE, linewidth = 1.1) +
+  geom_smooth(data = re, aes(x = strikes, colour = "Real estate"), method = "lm", formula = y ~ x,
+              se = FALSE, linewidth = 1.1) +
+  scale_x_log10(breaks = c(1, 2, 3, 5, 10, 20, 50)) +
   scale_y_log10(labels = scales::label_comma()) +
   scale_colour_manual(values = c("Other economics" = ZISSOU[1], "Real estate" = ZISSOU[5]), name = NULL) +
-  labs(x = "Strikes listed per event", y = "Median contracts traded per strike (log scale)") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1, size = 2.5, linewidth = 0))) +
+  labs(x = "Strikes listed in the event (log scale)", y = "Contracts traded per strike (log scale)") +
   theme_ree() + theme(legend.position = "bottom")
 save_fig("figures/volume_per_strike_by_strikes.png", p2, width = 8, height = 5)
