@@ -135,7 +135,7 @@ Table~\ref{tab:regression} regresses log event volume on a real estate indicator
 
 Volume does not say what it would have cost to trade or whether the prices were any good. Daily closing quotes are available for every real estate market listed for at least two days and for a fixed sample of about a quarter of the other economics markets, which leaves \quoteMarkets{} settled markets, \quoteReMarkets{} of them real estate (Tables~\ref{tab:quotes_summary} and~\ref{tab:quotesgroup} in the appendix). The median quoted spread is \spreadComparison{}, and with controls the two groups do not differ significantly (Table~\ref{tab:quotes}, column 1). Real estate markets have a two-sided quote on \twoSidedRe{} per cent of days against \twoSidedOther{} per cent elsewhere (column 2), which fits the account of \citet{diercks2026kalshi}, who note that Kalshi is supported by professional market makers. What is missing is anyone to take the other side: house price markets trade on \priceDaysTraded{} per cent of days and rent markets on \rentDaysTraded{} per cent, against \otherDaysTraded{} per cent in the comparison group. Nor is a spread of \spreadRe{} cents cheap, since on a contract priced at 50 cents it amounts to a round trip of \spreadRoundTrip{} per cent.
 
-Prices are about as accurate as elsewhere. Taking the quote midpoint one day before close as the forecast, the raw Brier score is worse for real estate, \brierRe{} against \brierOther{}, but real estate prices sit closer to 50 cents, where any forecast scores worse, and conditional on $p(1-p)$ the difference is \brierDiff{} and insignificant, both one day and seven days out (columns 3 and 4). A regression of outcomes on prices gives a slope of \calSlope{} with no difference for real estate (column 5; Figure~\ref{fig:calibration} in the appendix), which matches what \citet{diercks2026kalshi} find for Kalshi's macroeconomic contracts. Of the four benefits that \citet{fabozzi2020thirty} list for property derivatives, information about future prices is thus the only one delivered, and even that rests on only \priceForecastN{} house price markets with a one-day forecast.
+Prices are about as accurate as elsewhere. I take the quote midpoint one day before a market closes as its forecast of the probability that the contract pays out, and measure accuracy by the Brier score, the squared difference between that forecast and the outcome (one if the contract paid, zero if not), so that a perfect forecast scores zero and a forecast of 50 per cent always scores 0.25. The raw score is worse for real estate, \brierRe{} against \brierOther{}, but real estate prices sit closer to 50 cents, where any forecast scores worse, and conditional on $p(1-p)$ the difference is \brierDiff{} and insignificant, both one day and seven days out (columns 3 and 4). A regression of outcomes on prices gives a slope of \calSlope{} with no difference for real estate (column 5; Figure~\ref{fig:calibration} in the appendix), which matches what \citet{diercks2026kalshi} find for Kalshi's macroeconomic contracts. Of the four benefits that \citet{fabozzi2020thirty} list for property derivatives, information about future prices is thus the only one delivered, and even that rests on only \priceForecastN{} house price markets with a one-day forecast.
 
 \begin{table}[H]
 \centering\small
@@ -144,13 +144,15 @@ Prices are about as accurate as elsewhere. Taking the quote midpoint one day bef
 \begin{tabular}{lccccc}
 \toprule
  & (1) & (2) & (3) & (4) & (5) \\
- & Spread & Two-sided & Brier, 1 day & Brier, 7 days & Outcome \\
+ & & & \multicolumn{2}{c}{Brier score} & \\
+\cmidrule(lr){4-5}
+ & Spread & Two-sided & 1 day ahead & 7 days ahead & Outcome \\
 \midrule
 \tabinput{tables/quotes_regression}
 \bottomrule
 \end{tabular}
 \par\vspace{0.4em}
-\parbox{\textwidth}{\footnotesize\textit{Notes: OLS on settled markets. Spread is the market's median quoted spread; two-sided is the share of days with both a bid and an ask. Column 5 regresses the outcome (1 if yes) on the price one day before close. Standard errors clustered by event in parentheses. *** p < 0.01, ** p < 0.05, * p < 0.10.}}
+\parbox{\textwidth}{\footnotesize\textit{Notes: OLS on settled markets. Spread is the market's median quoted spread; two-sided is the share of days with both a bid and an ask. The Brier score in columns 3 and 4 is the squared difference between the outcome (1 if yes) and the price one day or seven days before close, lower being more accurate. Column 5 regresses the outcome on the price one day before close. Standard errors clustered by event in parentheses. *** p < 0.01, ** p < 0.05, * p < 0.10.}}
 \end{table}
 
 \subsection{Hedging capacity of an index contract}
