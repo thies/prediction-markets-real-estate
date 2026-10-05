@@ -21,7 +21,8 @@ RE_PATTERN = re.compile(
     re.I,
 )
 
-r = requests.get(f"{BASE}/series", timeout=120)
+# include_volume adds each series' lifetime volume in contracts, for every category
+r = requests.get(f"{BASE}/series", params={"include_volume": "true"}, timeout=300)
 r.raise_for_status()
 series = r.json()["series"]
 (ROOT / "data/raw/kalshi_series.json").write_text(json.dumps(series))
@@ -35,6 +36,7 @@ for s in series:
         "title": s.get("title"),
         "category": s.get("category"),
         "frequency": s.get("frequency"),
+        "volume": float(s.get("volume_fp") or 0),
         "tags": "|".join(s.get("tags") or []),
         "settlement_sources": "|".join(x.get("name", "") for x in (s.get("settlement_sources") or [])),
         "re_keyword": bool(RE_PATTERN.search(text)),

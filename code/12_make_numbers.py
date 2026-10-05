@@ -82,6 +82,18 @@ claim("Median real estate market trades less than the median other market",
 
 # Series that look like real estate but are not classified: new contract types to review by hand.
 s = pd.read_csv(D / "kalshi_series.csv")
+
+# The whole exchange: lifetime volume by category from the series list
+cat = s.groupby("category").volume.sum()
+re_all = s[s.ticker.isin(set(re_.series_ticker))].volume.sum()
+put("allVolBn", i(cat.sum() / 1e9))
+put("sportsVolBn", i(cat["Sports"] / 1e9))
+put("sportsShare", i(cat["Sports"] / cat.sum() * 100))
+put("sportsToRe", thousand(cat["Sports"] / re_all) if False else i(round(cat["Sports"] / re_all, -3)))
+put("reShareAll", f"{re_all / cat.sum() * 100:.3f}")
+put("sportsSeriesBigger", i((s[s.category == "Sports"].volume > re_all).sum()))
+claim("Series-level and market-level volume agree for economics (within 2 per cent)", abs(cat["Economics"] / m.volume.sum() - 1) < 0.02)
+claim("Sports is the largest category on Kalshi and more than 1,000 times real estate", cat.idxmax() == "Sports" and cat["Sports"] > 1000 * re_all)
 stem = lambda t: t[2:] if t.startswith("KX") else t
 new = s[s.re_keyword & s.category.eq("Economics") & s.ticker.isin(set(m.series_ticker))
         & ~s.ticker.map(stem).isin(set(GROUP_OF) | REVIEWED_NOT_REAL_ESTATE | COMMERCIAL_ADJACENT)]

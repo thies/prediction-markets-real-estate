@@ -97,7 +97,7 @@ The regressions use closed events, for which volume is final: \regEvents{} event
 
 \subsection{Volume}
 
-Table~\ref{tab:inventory} gives the inventory. Real estate contracts account for \reVolM{} million of the \totalVolM{} million contracts traded in the category, while the single series on Federal Reserve decisions traded \fedVolM{} million. House price contracts are spread over \priceSeries{} series, most of which were listed for one event and not renewed (Table~\ref{tab:series}), and \rentZeroShare{} per cent of rent markets never traded once. The longest real estate contract ran \reMaxHorizon{} days. Volume in the category is highly concentrated, ten series accounting for \topTenShare{} per cent of it, so most of Kalshi's economics contracts are thin; real estate contracts are thinner still, the median market trading \reMedianVol{} contracts against \otherMedianVol{} in the comparison group.
+Table~\ref{tab:inventory} gives the inventory. Real estate contracts account for \reVolM{} million of the \totalVolM{} million contracts traded in the category, while the single series on Federal Reserve decisions traded \fedVolM{} million. Economics is itself a small corner of the exchange. Of the \allVolBn{} billion contracts traded on Kalshi in all categories, \sportsShare{} per cent are bets on sporting events, about \sportsToRe{} times the volume of all real estate contracts together, and \sportsSeriesBigger{} individual sports series have each traded more than real estate as a whole (Table~\ref{tab:categories} in the appendix). House price contracts are spread over \priceSeries{} series, most of which were listed for one event and not renewed (Table~\ref{tab:series}), and \rentZeroShare{} per cent of rent markets never traded once. The longest real estate contract ran \reMaxHorizon{} days. Volume in the category is highly concentrated, ten series accounting for \topTenShare{} per cent of it, so most of Kalshi's economics contracts are thin; real estate contracts are thinner still, the median market trading \reMedianVol{} contracts against \otherMedianVol{} in the comparison group.
 
 \begin{table}[H]
 \centering\small
@@ -223,7 +223,7 @@ Nor could the markets absorb a real hedge. An owner of a 500,000 dollar home who
 
 Prediction markets have not given real estate the derivatives market it lacks. Event contracts on house prices, rents and mortgage rates are listed, quoted and accurately priced, and almost nobody trades them. They make up \reVolShare{} per cent of the volume in Kalshi's economics category, the accounts that trade them on Polymarket are small, do not return and include no one who looks like a hedger, and the open order books could not carry the hedge of a single home. What the contracts supply is a forecast of the next index release, which is useful and is not risk transfer.
 
-The reasons are the old ones. \citet{fabozzi2020thirty} put liquidity and the missing counterparty at the centre, and the retail speculators who were supposed to fill that gap have come to the exchanges and trade the Federal Reserve and the price of petrol instead. Had they come to housing, the contracts would still not hedge much, because at the horizons listed an index removes almost none of the price risk of an individual house, and in calm markets it removes little at any horizon. A market that completes real estate would need contracts that run for years, on indices local enough to track a house, with counterparties willing to hold the other side for that long. Nothing in the event contract format rules that out, since a ladder of binary contracts hedges as well as a future, but nothing in the present markets points towards it either.
+The reasons are the old ones. \citet{fabozzi2020thirty} put liquidity and the missing counterparty at the centre, and the retail speculators who were supposed to fill that gap have come to the exchanges and trade sport, which makes up \sportsShare{} per cent of Kalshi's volume, and within economics the Federal Reserve and the price of petrol. Had they come to housing, the contracts would still not hedge much, because at the horizons listed an index removes almost none of the price risk of an individual house, and in calm markets it removes little at any horizon. A market that completes real estate would need contracts that run for years, on indices local enough to track a house, with counterparties willing to hold the other side for that long. Nothing in the event contract format rules that out, since a ladder of binary contracts hedges as well as a future, but nothing in the present markets points towards it either.
 
 Several limits should be kept in mind. The hedging test uses Case-Shiller indices and not the Zillow and Parcl indices on which the event contracts settle, covers two cities, and fits hedge ratios in sample. Order book depth is observed on one day, since neither exchange archives its books, although the code behind this paper records a snapshot at every update, so that a history will build up. Polymarket's quotes and price accuracy have not been analysed, and for the CME contracts after 2007 I rely on \citet{fabozzi2020thirty}. These markets are young and changing, and the analysis is built to be rerun as they do.
 
@@ -249,6 +249,21 @@ Series & Title & Events & Markets & Contracts (000) & First & Last \\
 \end{longtable}
 \end{footnotesize}
 \noindent{\footnotesize\textit{Notes: All series classified as real estate, sorted by volume within group. Titles as given by the exchange, truncated. Last close can lie in the future for open markets.}}
+
+\begin{table}[H]
+\centering\small
+\caption{\textbf{Kalshi volume by category}}
+\label{tab:categories}
+\begin{tabular}{lrrr}
+\toprule
+Category & Series & Contracts (millions) & Share (\%) \\
+\midrule
+\tabinput{tables/categories}
+\bottomrule
+\end{tabular}
+\par\vspace{0.4em}
+\parbox{\textwidth}{\footnotesize\textit{Notes: Lifetime volume of every series listed on Kalshi, by the exchange's own category, as of \dataDate{}. Categories with less than half a per cent of volume are grouped. The last two rows repeat the real estate series of this paper, which are part of the Economics category.}}
+\end{table}
 
 \begin{table}[H]
 \centering\small

@@ -216,3 +216,20 @@ if (D_ / "depth_latest.csv").exists() and "impact_100" in pd.read_csv(D_ / "dept
             cells += [f"{x.notna().mean()*100:.0f}", f"{(x <= 5).mean()*100:.0f}", med]
         lines.append(f"{q:,} & " + " & ".join(cells) + " \\\\")
     (T / "price_impact.tex").write_text("\n".join(lines) + "\n")
+
+# Kalshi volume by category, with real estate for comparison
+sv = pd.read_csv(D_ / "kalshi_series.csv")
+if "volume" in sv.columns:
+    cat = sv.groupby("category").agg(series=("ticker", "size"), vol=("volume", "sum")).sort_values("vol", ascending=False)
+    re_series = set(mk[mk.real_estate].series_ticker)
+    price_series = set(mk[mk.re_group == "price"].series_ticker)
+    tot = cat.vol.sum()
+    big = cat[cat.vol / tot >= 0.005]
+    rest = cat[cat.vol / tot < 0.005]
+    lines = [f"{tex(c)} & {r.series:,} & {r.vol/1e6:,.0f} & {r.vol/tot*100:.1f} \\\\" for c, r in big.iterrows()]
+    lines.append(f"Other categories & {rest.series.sum():,} & {rest.vol.sum()/1e6:,.0f} & {rest.vol.sum()/tot*100:.1f} \\\\")
+    lines.append("\\midrule")
+    for lab, ss in [("Real estate (within Economics)", re_series), ("House prices (within Economics)", price_series)]:
+        v = sv[sv.ticker.isin(ss)].volume.sum()
+        lines.append(f"{lab} & {len(ss)} & {v/1e6:,.2f} & {v/tot*100:.3f} \\\\")
+    (T / "categories.tex").write_text("\n".join(lines) + "\n")
