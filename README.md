@@ -1,8 +1,10 @@
-# Real Estate Derivatives at Last? An Exploration of Prediction Markets
+# Real Estate Derivatives at Last? Prediction Markets as Forecasts, Not Hedges
 
 Code and LaTeX source for the paper by Thies Lindenthal (University of Cambridge). The compiled paper is `latex/main.pdf`.
 
 The paper asks whether event contracts on prediction markets (Kalshi, Polymarket) succeed where thirty years of property derivatives did not. It is built to be re-run: no result is typed into the text. Every number in the prose is generated from the data, and the pipeline checks the qualitative claims the text makes against each new download.
+
+The paper is a living document: it is updated quarterly and each version is identified by the date of its data. [LIVING_PAPER.md](LIVING_PAPER.md) describes what updates automatically, what does not, and how to cite a version.
 
 ## Replicating and updating
 

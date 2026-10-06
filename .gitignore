@@ -2,6 +2,7 @@
 /*
 !/.gitignore
 !/README.md
+!/LIVING_PAPER.md
 !/requirements.txt
 !/run_all.py
 !/code/
@@ -19,3 +20,6 @@ latex/*.blg
 .Rhistory
 # helper for the author's literature folder; depends on files that are not published
 code/fetch_papers.py
+
+# Press and outreach pieces (Handelsblatt etc.) are never published here
+/outreach/

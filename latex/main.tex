@@ -29,7 +29,7 @@
 \begin{document}
 \begin{center}
   \vspace*{0.5em}
-  {\large\bfseries\singlespacing Real Estate Derivatives at Last? An Exploration of Prediction Markets}\\[1.5em]
+  {\large\bfseries\singlespacing Real Estate Derivatives at Last? Prediction Markets as Forecasts, Not Hedges}\\[1.5em]
   \ifanon
     {\small\textit{Submitted for blind review}}\\[0.3em]
   \else
@@ -37,7 +37,7 @@
       Thies Lindenthal\\[0.4em]
       Department of Land Economy, University of Cambridge\\[0.2em]
       \texttt{htl24@cam.ac.uk}}\\[1.2em]
-    {\small\textit{Draft with data to \dataDate{}. Preliminary results.}}\\[0.3em]
+    {\small\textit{Living paper, version \versionId{}. Data to \dataDate{}; updated quarterly (Appendix~\ref{app:protocol}).}}\\[0.3em]
   \fi
 \end{center}
 
@@ -231,6 +231,14 @@ Several limits should be kept in mind. The hedging test uses Case-Shiller indice
 \bibliography{references}
 
 \appendix
+\section{How this paper is updated}\label{app:protocol}
+
+The markets studied here are young and change from month to month, so this paper is published as a living document. All data come from public sources, and the whole analysis, from the downloads to the tables, the figures and every number quoted in the text, is produced by code that is available with the paper. At each update the data are downloaded again and the analysis is rerun, which also adds a snapshot of the order books to a history that cannot be recovered afterwards because the exchanges do not archive it.
+
+Three kinds of content are kept apart. The theory, the definitions and the account of the earlier literature are stable and change only when I revise them. The empirical material is refreshed automatically: sample sizes, volumes, regression estimates, forecast scores, order book depth and the numbers in the prose that report them. The claims that interpret this material are mine and are not rewritten by any automatic process. Instead, each statement the text makes about the data, such as a difference being insignificant or no listed contract running longer than two years, is encoded as a check that is run against every new download, and a statement that fails its check is revised by hand before a version is released.
+
+The first version is archived with a digital object identifier. [Placeholder: DOI, once assigned.] Updates are released quarterly, and each version is identified by the date of its data, which is printed on the title page; this version is \versionId{}. Earlier versions remain available, with their data snapshot and the state of the code that produced them, so that a citation can point to the exact text and numbers it refers to. The paper should be cited with its version.
+
 \section{Supporting tables and figures}
 
 \begin{footnotesize}

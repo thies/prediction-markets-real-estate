@@ -46,6 +46,7 @@ def month(ts):
 v = vintage("kalshi_markets")
 put("dataDate", f"{v.day} {v.strftime('%B %Y')}")
 put("dataMonth", month(v))
+put("versionId", v.strftime("%Y-%m-%d"))   # a version of the paper is identified by the date of its data
 
 # ---------------------------------------------------------------- Kalshi inventory
 m = pd.read_csv(D / "kalshi_markets.csv")
