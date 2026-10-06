@@ -6,6 +6,6 @@
 
 **What does not update by itself.** The argument. The theory, the definitions and the reading of the earlier literature change only when the author revises them. The conclusions are the author's and are not rewritten by any automatic process. Each statement the text makes about the data is encoded as a check that runs against every new download. If the data stop supporting a sentence, the check fails and the sentence is revised by hand before a version is released.
 
-**Versions and citation.** The first version is archived with a DOI. Each quarterly update is identified by the date of its data, which is printed on the title page, for example version 2026-10-05. Earlier versions stay available together with their data snapshot and the code that produced them, so a citation always points to the exact text and numbers it refers to. Please cite the paper with its version.
+**Versions and citation.** The first version is deposited at SSRN and carries a DOI. The quarterly updates are published at [living.pub](https://living.pub). Each is identified by the date of its data, which is printed on the title page, for example version 2026-10-05. The numbers change from one version to the next, so please cite the paper with its version.
 
 **Code.** All code is public at https://github.com/thies/prediction-markets-real-estate. One command downloads the data, runs every step and rebuilds the paper.
